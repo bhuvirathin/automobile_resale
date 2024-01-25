@@ -6,19 +6,28 @@ import { BrowserRouter } from 'react-router-dom';
 import Dashboard from './components/dashboard';
 import Logos from './components/logos';
 import Search from './components/search';
-
+import { createContext } from "react";
+// import { store } from './store'
+import { Provider } from 'react-redux'
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+
+export const UserContext = createContext('')
 root.render(
   <React.StrictMode>
+     {/* <Provider store={store}> */}
     <BrowserRouter basename="/dashboard">
+    <UserContext.Provider value={'chennai'}>
       <Dashboard/>
       <Logos/>
+      </UserContext.Provider>
     </BrowserRouter>
     <BrowserRouter basename="/search">
       <Search/>
     </BrowserRouter>
+    {/* </Provider> */}
   </React.StrictMode>
 );
 

@@ -1,17 +1,25 @@
 import 'bootstrap/dist/css/bootstrap.css'; 
 import {Button,Form,Col,Row} from 'react-bootstrap';
 import * as formik from 'formik';
+import {useContext} from 'react';
+import {UserContext} from '../index';
+import { useDispatch } from 'react-redux'
+// import addData from '../reducer/formReducer'
+// import type { AppDispatch } from '../store'
 var fs = require('browserify-fs');
-
+// export const useAppDispatch: () => AppDispatch = useDispatch
 const AddForm = (props : any) => {
     const { Formik } = formik;
+    const location:string = useContext(UserContext);
 
+    // const dispatch = useAppDispatch()
 
     return(
       <Formik
       onSubmit={(values, actions) => {
-         const data =JSON.stringify(values, null, 2);
-         console.log(data);
+         const data:string =JSON.stringify(values, null, 2);
+         console.log(data); 
+       //  dispatch({form:values})
 	//       fs.writeFile('../mock/data.json', 'jhhjghkh', function() {
 	// 	fs.readFile('../mock/data.json', 'utf-8', function(err:any, adata:any) {
 	// 		console.log(adata);
@@ -20,7 +28,7 @@ const AddForm = (props : any) => {
       }}
       initialValues={{
         model:props.modelName,
-        location:'',
+        location:location,
         year:'',
         kms:0,
         fitments:'',
@@ -115,10 +123,11 @@ const AddForm = (props : any) => {
             name="kms"
             onChange={handleChange} />
           </Form.Group>
-          {/* <Form.Group  as={Col} controlId="formphoto">
+          <Form.Group  as={Col} controlId="formphoto">
             <Form.Label >Photo</Form.Label>
-            <Form.Control type="file" accept='.png,.jpg,.jpeg' />
-          </Form.Group>  </Row><Row> */}
+            <Form.Control type="file"
+            name="photo" accept='.png,.jpg,.jpeg' />
+          </Form.Group>  </Row><Row>
           <Button variant="primary" className='col-sm-3'  type="submit">
             Submit
           </Button>  </Row>

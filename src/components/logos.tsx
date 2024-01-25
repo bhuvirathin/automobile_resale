@@ -16,10 +16,12 @@ const imageList:imageData[] = images.keys().map((image) => {
 export default function Logos() {
     const [showForm,setShowForm] = useState(false)
     const [model,setModel] = useState('')
+
     function displayForm(e : any){
         setShowForm(true);
         setModel(e.alt)
     }
+    
   return (
     <div>
     <div className="logos">
