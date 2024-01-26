@@ -6,7 +6,7 @@ import {UserContext} from '../index';
 import { useDispatch } from 'react-redux'
 // import addData from '../reducer/formReducer'
 // import type { AppDispatch } from '../store'
-var fs = require('browserify-fs');
+
 // export const useAppDispatch: () => AppDispatch = useDispatch
 const AddForm = (props : any) => {
     const { Formik } = formik;
@@ -20,11 +20,16 @@ const AddForm = (props : any) => {
          const data:string =JSON.stringify(values, null, 2);
          console.log(data); 
        //  dispatch({form:values})
-	//       fs.writeFile('../mock/data.json', 'jhhjghkh', function() {
-	// 	fs.readFile('../mock/data.json', 'utf-8', function(err:any, adata:any) {
-	// 		console.log(adata);
-	// 	});
-	// });
+       fetch("http://localhost:4000/users", {
+        method: "POST",
+        headers : {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+
+        body: data,
+      })
+        .then((res) => res.json())
       }}
       initialValues={{
         model:props.modelName,
