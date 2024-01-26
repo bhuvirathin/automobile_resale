@@ -40,7 +40,8 @@ const AddForm = (props : any) => {
         transmission:'',
         owners:0,
         validDate:'',
-        color:''
+        color:'',
+        photo:'',
       }}
     >
       {({ handleSubmit, handleChange, values, touched, errors }) => (
@@ -131,7 +132,8 @@ const AddForm = (props : any) => {
           <Form.Group  as={Col} controlId="formphoto">
             <Form.Label >Photo</Form.Label>
             <Form.Control type="file"
-            name="photo" accept='.png,.jpg,.jpeg' />
+            name="photo"
+            value={values.photo} accept='.png,.jpg,.jpeg' />
           </Form.Group>  </Row><Row>
           <Button variant="primary" className='col-sm-3'  type="submit">
             Submit
