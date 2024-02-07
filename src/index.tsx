@@ -7,7 +7,7 @@ import Dashboard from './components/dashboard';
 import Logos from './components/logos';
 import Search from './components/search';
 import { createContext } from "react";
-// import { store } from './store'
+import { store } from './store'
 import { Provider } from 'react-redux'
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(
 export const UserContext = createContext('')
 root.render(
   <React.StrictMode>
-     {/* <Provider store={store}> */}
+     <Provider store={store}>
     <BrowserRouter basename="/dashboard">
     <UserContext.Provider value={'chennai'}>
       <Dashboard/>
@@ -27,7 +27,7 @@ root.render(
     <BrowserRouter basename="/search">
       <Search/>
     </BrowserRouter>
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>
 );
 

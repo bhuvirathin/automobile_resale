@@ -1,14 +1,13 @@
-// import React from 'react'
-// import type { RootState } from '../store'
-import { useSelector } from 'react-redux'
-import {useEffect} from 'react'
 
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
+import { useAppSelector, useAppDispatch } from '../store'
+import { addData,formData } from '../reducer/formReducer'
+
 export  default function Search() {
-   // const data = useSelector((state: RootState) => state)
-      const [resdata,setResdata] = useState<any[]>([]);
+      const [resdata,setResdata] = useState<formData[]>([]);
       const [searchtext,setSearchtext] = useState<string>('');
-      const [searchresult,setSearchresult] = useState<string[]>([]);
+      const searchresult = useAppSelector(state => state.form)
+      const dispatch = useAppDispatch()
       useEffect(() => {
         const fetchData = () => {
           fetch('data.json'
@@ -30,17 +29,19 @@ export  default function Search() {
     }, []);
     function handleChange(e:string){ setSearchtext(e);}
   function  getMatch(){
-    let matches:string[]=[];
+    let matches:formData[]=[];
   if (searchtext.length > 0){
-    resdata.forEach((value:any) =>{
-   for (const  obj in value){
-   if (value[obj]?.toString().includes(searchtext)){
-   matches.push(value[obj])
-   }
-   }
+    resdata.forEach((value:formData) =>{
+      let isMatchFound = false
+      Object.values(value).forEach(v => {
+        if(v?.toString().includes(searchtext)){
+          isMatchFound=true
+        }
+      })
+      if( isMatchFound) matches.push(value)
   } )
   }
-  setSearchresult(matches)
+  dispatch(addData(matches))
   }
 
   return (
@@ -48,9 +49,9 @@ export  default function Search() {
       <input type='text' value={searchtext} onChange={(e) =>handleChange(e.target.value)}/>
       <button onClick={(e)=>getMatch()}>search</button><br/>
       <strong>Filtered Results</strong><br/>
-      {searchresult.map((a:any) => {return <p>{JSON.stringify(a)}</p>})}<hr/>
+      {searchresult.formData.map((a:formData) => {return <p>{JSON.stringify(a)}</p>})}<hr/>
       <div>List All Data
-       {resdata.map((a:any) => {return <p>{JSON.stringify(a)}</p>})}
+       {resdata.map((a:formData) => {return <p>{JSON.stringify(a)}</p>})}
       </div>
 
     </div>

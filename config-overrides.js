@@ -13,6 +13,12 @@ module.exports = function override(config) {
         "path":require.resolve("path-browserify")
     })
     config.resolve.fallback = fallback;
+    config.module.rules.unshift({
+        test: /\.m?js$/,
+        resolve: {
+          fullySpecified: false, // disable the behavior
+        },
+      });
     config.plugins = (config.plugins || []).concat([
         new webpack.ProvidePlugin({
             process: 'process/browser',

@@ -33,5 +33,17 @@
     "validDate": "2024-01-15",
     "color": "grey",
     "photo": ""
+  },
+  {
+    "model": "datsun",
+    "location": "chennai",
+    "year": "20013",
+    "kms": 188899,
+    "fitments": "test",
+    "transmission": "ssssss",
+    "owners": 12,
+    "validDate": "2024-03-08",
+    "color": "grey",
+    "photo": ""
   }
 ]
